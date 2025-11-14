@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Segmentación Médica</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f7fb;
+      text-align: center;
+      margin: 0;
+      padding: 30px;
+    }
+    h1 { color: #1d4ed8; }
+    input[type="file"] { margin: 20px 0; }
+    label { display: block; margin-top: 10px; }
+    input[type="range"] { width: 60%; }
+    img {
+      margin-top: 25px;
+      max-width: 80%;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #1d4ed8;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover { background-color: #2563eb; }
+  </style>
+</head>
+<body>
+  <h1>🧬 Segmentación Médica</h1>
+  <p>Sube una imagen y ajusta los parámetros para segmentarla</p>
+
+  <input type="file" id="imageInput" accept="image/*">
+
+  <div>
+    <label>Distancia mínima entre picos: <span id="distVal">20</span></label>
+    <input type="range" id="min_distance" min="1" max="80" value="20" oninput="updateVal('distVal', this.value)">
+
+    <label>Área mínima: <span id="areaMinVal">100</span></label>
+    <input type="range" id="min_area" min="10" max="2000" value="100" oninput="updateVal('areaMinVal', this.value)">
+
+    <label>Área máxima: <span id="areaMaxVal">10000</span></label>
+    <input type="range" id="max_area" min="100" max="30000" value="10000" oninput="updateVal('areaMaxVal', this.value)">
+
+    <label>Sigma (Canny): <span id="sigmaVal">1.5</span></label>
+    <input type="range" id="sigma_canny" min="0.5" max="5" step="0.1" value="1.5" oninput="updateVal('sigmaVal', this.value)">
+
+    <label>Peso textura: <span id="weightVal">0.3</span></label>
+    <input type="range" id="weight_texture" min="0" max="1" step="0.05" value="0.3" oninput="updateVal('weightVal', this.value)">
+  </div>
+
+  <button onclick="procesarImagen()">Ejecutar Segmentación</button>
+
+  <div>
+    <img id="resultado" src="" alt="Resultado aparecerá aquí">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
